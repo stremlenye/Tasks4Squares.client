@@ -1,5 +1,6 @@
-/*AppDispatcher.js
-  Dispatcher, decorated with helper methods for view and server actions handling
+/*
+* AppDispatcher.js
+* Dispatcher, decorated with helper methods for view and server actions handling
 */
 
 import {Dispatcher} from 'flux'
@@ -21,6 +22,7 @@ class AppDispatcher extends Dispatcher {
       payload
     })
   }
+
   handleErrorAction (actionType, payload) {
     this.dispatch({
       source: constants.payloadSources.error,
