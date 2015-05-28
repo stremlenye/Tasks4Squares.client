@@ -3,69 +3,34 @@
 * Authentication stores. Formaly local cache of authentication status with
 * push notifications.
 */
-
-import dispatcher from 'dispatcher'
-import EventEmitter from 'events'
+import BaseStore from './base'
 import constants from 'constants/auth'
-
-const changeEvent = 'authStores_changed'
-const emitter = new EventEmitter()
-
-function emit () {
-  emitter.emit(changeEvent)
-}
 
 let state = constants.states.signedOut
 
-function setStatus (newState) {
-  state = newState
-}
-
-function signIn () {
-  setStatus(constants.states.signedIn)
-  emit()
-}
-
-function signOut () {
-  setStatus(constants.states.signedOut)
-  emit()
-}
-
-class AuthStores {
-
-  subscribe (listener) {
-    emitter.addListener(changeEvent, listener)
-  }
-
-  unsubscribe (listener) {
-    emitter.removeListener(changeEvent, listener)
-  }
-
-  getState () {
+class AuthStores extends BaseStore {
+  get state () {
     return state
   }
-
-  isAuthenticated () {
-    return this.getState() === constants.states.signedIn
-  }
 }
 
-AuthStores.dispatcherIndex = dispatcher.register(payload => {
+function dispatcherCallback (payload) {
   const action = payload.action
-
   switch (action.actionType) {
     case constants.actions.signedIn:
-      signIn(action.authData)
+      state = constants.states.signedIn
+      this.emitChange()
       break
 
     case constants.actions.logout:
     case constants.actions.failed:
-      signOut()
+      state = constants.states.signedOut
+      this.emitChange()
       break
 
     default:
       return
   }
-})
+}
 
-export default new AuthStores()
+export default new AuthStores(dispatcherCallback)

@@ -3,48 +3,29 @@
 * Task stores
 */
 import _ from 'lodash'
-
-import dispatcher from 'dispatcher'
-
+import BaseStore from './base'
 import constants from 'constants/task'
 
-import {EventEmitter} from 'events'
-
-const changeEventName = 'task_changed'
-
-const emitter = new EventEmitter()
 let tasks = []
 
-let task = {}
-
-function emit () {
-  emitter.emit(changeEventName)
+class TasksStore extends BaseStore {
+  get tasks () {
+    return tasks
+  }
 }
 
-task.subscribe = listener => {
-  emitter.addListener(changeEventName, listener)
-}
-
-task.unsubscribe = listener => {
-  emitter.removeListener(changeEventName, listener)
-}
-
-task.get = () => {
-  return tasks
-}
-
-task.dispatcherIndex = dispatcher.register(payload => {
+function dispatcherCallback (payload) {
   const action = payload.action
 
   switch (action.actionType) {
     case constants.actions.listLoaded:
       tasks = action.tasks
-      emit()
+      this.emitChange()
     break
 
     case constants.actions.added:
       tasks.push(action.task)
-      emit()
+      this.emitChange()
     break
 
     case constants.actions.updated:
@@ -52,19 +33,19 @@ task.dispatcherIndex = dispatcher.register(payload => {
         return t.id === action.task.id
       })
       tasks.push(action.task)
-      emit()
+      this.emitChange()
     break
 
     case constants.actions.deleted:
       _.remove(tasks, t => {
         return t.id === action.id
       })
-      emit()
+      this.emitChange()
     break
 
     default:
       return
   }
-})
+}
 
-export default task
+export default new TasksStore(dispatcherCallback)

@@ -1,8 +1,8 @@
-/* log.js
-* Misc clientside logging store
+/*
+* Misc client side logging store
 */
 
-import dispatcher from 'dispatcher'
+import BaseStore from './base'
 
 /*eslint-disable no-console */
 function log (payload) {
@@ -12,11 +12,10 @@ function log (payload) {
 }
 /*eslint-enable no-console */
 
-class LogStore {
+class LogStore extends BaseStore {
 }
 
-LogStore.dispatcherIndex = dispatcher.register(payload => {
+function dispatcherCallback (payload) {
   log(payload)
-})
-
-export default new LogStore()
+}
+export default new LogStore(dispatcherCallback)
