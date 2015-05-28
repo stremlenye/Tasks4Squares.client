@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React from 'react'
-import stores from 'stores/task'
+import {tasksStore} from 'stores'
 import Square from './square'
 
 function filter (priority, task) {
@@ -12,22 +12,22 @@ class SquaresLayout extends React.Component {
   constructor () {
     super()
     this.state = {
-      tasks: stores.get()
+      tasks: tasksStore.get()
     }
   }
 
   onChange () {
     this.setState({
-      tasks: stores.get()
+      tasks: tasksStore.get()
     })
   }
 
   componentDidMount () {
-    stores.subscribe(this.onChange)
+    tasksStore.subscribe(this.onChange)
   }
 
   componentWillUnmount () {
-    stores.unsubscribe(this.onChange)
+    tasksStore.unsubscribe(this.onChange)
   }
 
   render () {

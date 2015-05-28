@@ -6,9 +6,9 @@
 
 import dispatcher from 'dispatcher'
 import EventEmitter from 'events'
-import changeEvent from 'authStores_changed'
 import constants from 'constants/auth'
 
+const changeEvent = 'authStores_changed'
 const emitter = new EventEmitter()
 
 function emit () {

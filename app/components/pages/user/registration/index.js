@@ -1,7 +1,7 @@
 import React from 'react'
 import Form from './form'
 import appConstants from 'constants'
-import userStore from 'stores/user'
+import {userStore} from 'stores'
 
 export default class Registration extends React.Component {
 
