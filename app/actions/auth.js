@@ -3,7 +3,7 @@
  * Creators for authentication actions
  */
 
-import dispatcher from 'AppDispatcher'
+import dispatcher from 'dispatcher'
 import constants from 'constants/auth'
 import navigationConstants from 'constants/navigation'
 import authService from 'services/auth'

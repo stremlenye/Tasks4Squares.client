@@ -4,7 +4,6 @@
 */
 
 import React from 'react/addons'
-import 'core-js/modules/es6.reflect'
 import autobind from 'autobind-decorator'
 import {authActions} from 'actions'
 

@@ -4,7 +4,7 @@
 * push notifications.
 */
 
-import dispatcher from 'AppDispatcher'
+import dispatcher from 'dispatcher'
 import EventEmitter from 'events'
 import changeEvent from 'authStores_changed'
 import constants from 'constants/auth'

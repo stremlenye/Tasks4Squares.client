@@ -2,7 +2,7 @@
  * Creators for user actions
  */
 import service from 'services/user'
-import dispatcher from 'AppDispatcher'
+import dispatcher from 'dispatcher'
 import constants from 'constants/user'
 
 export default {

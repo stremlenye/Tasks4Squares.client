@@ -2,10 +2,12 @@
  * Registration form
  */
 import React from 'react'
-import userActions from 'actions'
+import autobind from 'autobind-decorator'
+import {userActions} from 'actions'
 
 class Form extends React.Component {
 
+  @autobind
   handleSubmit (event) {
     event.preventDefault()
     event.stopPropagation()
@@ -17,7 +19,7 @@ class Form extends React.Component {
 
   render () {
     return (
-      <form role="form" onSubmit={this.handleSubmit.bind(this)}>
+      <form role="form" onSubmit={this.handleSubmit}>
         <div>
           <label htmlFor="name">Name</label>
           <input type="text" name="name" id="name" ref="name"

@@ -2,7 +2,7 @@
  * task action creators
  */
 
-import dispatcher from 'AppDispatcher'
+import dispatcher from 'dispatcher'
 import service from 'services/task'
 import constants from 'constants/task'
 

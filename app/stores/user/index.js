@@ -2,7 +2,7 @@
  * Stores the current user related information
  */
 
-import dispatcher from 'AppDispatcher'
+import dispatcher from 'dispatcher'
 import {EventEmitter} from 'events'
 
 import appConstants from 'constants'

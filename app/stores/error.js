@@ -2,7 +2,7 @@
  * Error stores
  */
 
-import dispatcher from 'AppDispatcher'
+import dispatcher from 'dispatcher'
 import globalConstants from 'constants'
 import constants from 'constants/error'
 import navigationConstants from 'constants/navigation'

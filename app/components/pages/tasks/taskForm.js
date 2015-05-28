@@ -1,6 +1,5 @@
 import _ from 'lodash'
 import React from 'react'
-import 'core-js/modules/es6.reflect'
 import autobind from 'autobind-decorator'
 
 class TaskForm extends React.Component {

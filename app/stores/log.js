@@ -2,7 +2,7 @@
 * Misc clientside logging store
 */
 
-import dispatcher from 'AppDispatcher'
+import dispatcher from 'dispatcher'
 
 /*eslint-disable no-console */
 function log (payload) {
