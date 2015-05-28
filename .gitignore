@@ -20,3 +20,4 @@ dist
 **/data
 *.iml
 npm-debug.log
+**/public
