@@ -20,7 +20,7 @@ module.exports = {
 
   resolve: {
     root: path.join(__dirname, '/app'),
-    extensions: ['.js'],
+    extensions: ['', '.js'],
   },
 
   devtool: 'cheap-module-eval-source-map',

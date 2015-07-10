@@ -1,27 +1,10 @@
 import React from 'react'
-import { Connector } from 'redux/react'
-import { Route, Redirect } from 'react-router'
-import { Frame, Signin, Tasks } from 'application/components'
+import { RouteHandler } from 'react-router'
 
-const routes = (
-  <Route handler={Frame}>
-    <Route path="signin" handler={Signin} />
-    <Route path="tasks" handler={Tasks} />
-    <Redirect from="/" to="tasks" />
-  </Route>
-)
-
-class Application {
+class Application extends React.Component {
   render () {
-    return (
-      <Connector select={state => ({ state: state.application })}>
-        {this.renderRoutes}
-      </Connector>
-    )
-  }
-
-  renderRoutes () {
-    return routes
+    console.log('Application')
+    return (<div>{this.props.children}</div>)
   }
 }
 

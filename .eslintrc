@@ -30,9 +30,9 @@
   "rules": {
     "strict": 0,
     "semi": [2, "never"],
-    "comma-dangle": "always",
+    "comma-dangle": [2, "always"],
     "no-constant-condition": 2,
-    "no-cond-assign": "except-parens",
+    "no-cond-assign": [2, "except-parens"],
     "no-dupe-args": 2,
     "no-dupe-keys": 2,
     "no-duplicate-case": 2,

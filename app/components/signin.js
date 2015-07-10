@@ -2,7 +2,8 @@ import React from 'react'
 
 class Signin extends React.Component {
   render () {
-    return 'SIGNIN'
+    console.log('SIGNIN')
+    return <div>SIGNIN</div>
   }
 }
 
