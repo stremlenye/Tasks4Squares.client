@@ -12,7 +12,7 @@ const signinRequest = new Http().withUrl('http://localhost:9000/signin')
   .withResponseType('json')
 
 export function signin (login, password) {
-  return dispatch => signinRequest.withBody({ login, password}).exec()
+  return dispatch => signinRequest.withBody({ login, password }).exec()
     .then(() => dispatch({ type: constants.LOGGEDIN }))
     .catch(err => dispatch({
       type: constants.LOGIN_FAILED,

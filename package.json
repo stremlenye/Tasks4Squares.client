@@ -22,7 +22,7 @@
     "babel-loader": "^5.3.1",
     "css-loader": "^0.15.2",
     "eslint": "^0.24.0",
-    "eslint-plugin-react": "^2.6.4",
+    "eslint-plugin-react": "^2.7.0",
     "express": "^4.13.1",
     "file-loader": "^0.8.4",
     "less": "^2.5.1",

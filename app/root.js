@@ -8,9 +8,11 @@ import * as reducers from 'reducers'
 
 const store = createStore(reducers)
 
+const history = new HashHistory()
+
 function renderRoutes () {
   return (
-    <Router history={new HashHistory()}>
+    <Router history={history}>
       <Route path="/" component={Application}>
         <Route path="tasks" component={Tasks} />
         <Route path="signin" component={Signin} />

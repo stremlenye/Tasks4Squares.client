@@ -1,9 +1,12 @@
-import React from 'react'
-import { RouteHandler } from 'react-router'
+import React, { PropTypes } from 'react'
 
 class Application extends React.Component {
+
+  static propTypes = {
+    children: PropTypes.node.isRequired
+  }
+
   render () {
-    console.log('Application')
     return (<div>{this.props.children}</div>)
   }
 }
