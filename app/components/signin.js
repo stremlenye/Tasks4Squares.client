@@ -22,18 +22,13 @@ class SigninConnectorWrapper extends React.Component {
 
 class Signin extends React.Component {
 
-  constructor () {
-    super()
-    this.state = {}
-  }
-
   static propTypes = {
     onSubmit: PropTypes.func.isRequired
   }
 
   onFieldChanged (event) {
-    this.state[event.target.name] = event.target.value
-    this.setState(this.state)
+    event.preventDefault()
+    this.setState({[event.target.name]: event.target.value})
   }
 
   onSubmit (event) {
@@ -43,18 +38,15 @@ class Signin extends React.Component {
   }
 
   render () {
-    const { state: { login, password } } = this
     return (
-      <form onSubmit={::this.onSubmit}>
+      <form onSubmit={::this.onSubmit} onChange={::this.onFieldChanged}>
         <fieldset>
           <label htmlFor="login">Email</label>
           <input id="login" name="login" placeholder="your@mail.com"
-            onChange={::this.onFieldChanged} value={login} type="email" />
-        </fieldset>
-        <fieldset>
+            type="email" />
           <label htmlFor="password">Password</label>
-          <input id="password" name="password" type="password" value={password}
-            onChange={::this.onFieldChanged} placeholder="XyZ12%1" />
+          <input id="password" name="password" type="password"
+             placeholder="XyZ12%1" />
         </fieldset>
         <button type="submit">Signin</button>
       </form>
