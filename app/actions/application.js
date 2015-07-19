@@ -8,7 +8,7 @@ export function initialize () {
 }
 
 const signinRequest = new Http().withUrl('http://localhost:9000/signin')
-  .withMethod('GET').withHeader('Content-Type', 'application/json')
+  .withMethod('POST').withHeader('Content-Type', 'application/json')
   .withResponseType('json')
 
 export function signin (login, password) {
