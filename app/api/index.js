@@ -1,5 +1,4 @@
 import Http from 'immutable-http'
-import * as http from 'immutable-http'
 
 const resourceKey = 'resource'
 
