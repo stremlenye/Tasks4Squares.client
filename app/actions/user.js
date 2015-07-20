@@ -1,11 +1,12 @@
 import * as api from 'api'
 import * as constants from 'constants/login'
+import { SIGNED_UP, SIGNUP_FAILED } from 'constants/signup'
 
-export function signup (login, password) {
-  return dispatch => api.signup.withBody({ login, password }).exec()
-    .then(() => dispatch({ type: constants.SIGNED_UP }))
+export function signup (name, login, password) {
+  return dispatch => api.signup.withBody({name, login, password }).exec()
+    .then(() => dispatch({ type: SIGNED_UP }))
     .catch(err => dispatch({
-      type: constants.SIGNUP_FAILED,
+      type: SIGNUP_FAILED,
       payload: { err }
     }))
 }

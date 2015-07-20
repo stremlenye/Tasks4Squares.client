@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { log } from 'middlewares/log'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import { Application, Signin, Tasks } from 'components'
+import { Application, Signin, Signup, Tasks } from 'components'
 import * as reducers from 'reducers'
 
 const reducer = combineReducers(reducers)
@@ -19,6 +19,7 @@ function renderRoutes () {
     <Router history={history}>
       <Route path="/" component={Application}>
         <Route path="tasks" component={Tasks} />
+        <Route path="signup" component={Signup} />
         <Route path="signin" component={Signin} />
         <Redirect from="/" to="tasks" />
       </Route>
