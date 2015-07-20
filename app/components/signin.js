@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { connectSubmitPage } from 'utils'
-import { signin, eraseLogin } from 'actions/user'
+import { eraseSubmit } from 'actions/application'
+import { signin } from 'actions/user'
 
 class Signin extends React.Component {
 
@@ -49,4 +50,4 @@ class Signin extends React.Component {
   }
 }
 
-export default connectSubmitPage(Signin, signin, eraseLogin, 'login')
+export default connectSubmitPage(Signin, signin, eraseSubmit, 'login')

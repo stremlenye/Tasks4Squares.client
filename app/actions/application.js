@@ -5,3 +5,8 @@ export function initialize () {
     type: constants.INITIALIZE
   }
 }
+export function eraseSubmit () {
+  return dispatch => dispatch({
+    type: constants.ERASE_SUBMIT
+  })
+}

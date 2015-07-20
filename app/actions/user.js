@@ -10,12 +10,6 @@ export function signup (login, password) {
     }))
 }
 
-export function eraseLogin () {
-  return dispatch => dispatch({
-    type: constants.LOGIN_INIT
-  })
-}
-
 export function signin (login, password) {
   return dispatch => api.signin.withBody({ login, password }).exec()
     .then(() => dispatch({ type: constants.LOGGED_IN }))
