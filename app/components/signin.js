@@ -27,6 +27,7 @@ class Signin extends React.Component {
     callback(login, password)
   }
 
+  // TODO use better error way to display error
   render () {
     const { props: { succeed, failureReason } } = this
     return (
@@ -40,7 +41,7 @@ class Signin extends React.Component {
              placeholder="XyZ12%1" />
            <button type="submit">Signin</button>
         </fieldset>
-        //TODO use better error way to display error
+
         { (!succeed && failureReason) ? <p>{failureReason.toString()}</p>
           : null }
       </form>
