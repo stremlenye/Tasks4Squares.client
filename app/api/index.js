@@ -9,6 +9,6 @@ const base = (new Http()).withUrl(`http://localhost:9000/:${resourceKey}`)
 
 const post = base.withMethod('POST')
 
-export const signup = post.withDynamicSegment(resourceKey, 'signup')
+export const signup = post.withDynamicSegment(resourceKey, 'users/register')
 
 export const signin = post.withDynamicSegment(resourceKey, 'signin')

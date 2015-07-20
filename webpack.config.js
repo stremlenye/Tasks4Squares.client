@@ -23,7 +23,7 @@ module.exports = {
     extensions: ['', '.js'],
   },
 
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
 
   module: {
     loaders: [

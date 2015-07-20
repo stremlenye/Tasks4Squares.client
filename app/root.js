@@ -1,12 +1,16 @@
 import React from 'react'
 import { Redirect, Router, Route } from 'react-router'
 import HashHistory from 'react-router/lib/HashHistory'
-import { Provider } from 'redux/react'
-import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import { log } from 'middlewares/log'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Application, Signin, Tasks } from 'components'
 import * as reducers from 'reducers'
 
-const store = createStore(reducers)
+const reducer = combineReducers(reducers)
+const finalCreateStore = applyMiddleware(thunk, log)(createStore)
+const store = finalCreateStore(reducer)
 
 const history = new HashHistory()
 

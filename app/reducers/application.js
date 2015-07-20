@@ -1,17 +1,13 @@
-import * as constants from 'constants'
+import * as constants from 'constants/login'
+import { createReducer } from 'utils'
 
 const initial = {
   loggedin: true
 }
 
 const actionsMap = {
-  [constants.LOGGEDIN]: () => ({ loggedin: true }),
+  [constants.LOGGED_IN]: () => ({ loggedin: true }),
   [constants.LOGIN_FAILED]: () => ({ loggedin: false })
 }
 
-export function apptication (state = initial, { type, payload }) {
-  const reducer = actionsMap[type]
-  if (reducer)
-    Object.assign({}, state, reducer(state, payload))
-  return state
-}
+export default createReducer(initial, actionsMap)

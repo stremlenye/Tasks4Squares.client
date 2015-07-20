@@ -1,29 +1,19 @@
 import React, { PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
-import { Connector } from 'redux/react'
-import * as actions from 'actions/application'
-
-class SigninConnectorWrapper extends React.Component {
-  render () {
-    return (
-      <Connector>
-        {this.renderForm}
-      </Connector>)
-  }
-
-  renderForm ({dispatch}) {
-    const bindiedActions = bindActionCreators(actions, dispatch)
-    const { signin } = bindiedActions
-    return (
-      <Signin onSubmit={signin} />
-    )
-  }
-}
+import { connectSubmitPage } from 'utils'
+import { signin, eraseLogin } from 'actions/user'
 
 class Signin extends React.Component {
 
   static propTypes = {
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    onInit: PropTypes.func.isRequired,
+    succeed: PropTypes.bool,
+    failureReason: PropTypes.object
+  }
+
+  componentWillMount () {
+    const { props: { onInit } } = this
+    onInit()
   }
 
   onFieldChanged (event) {
@@ -38,6 +28,7 @@ class Signin extends React.Component {
   }
 
   render () {
+    const { props: { succeed, failureReason } } = this
     return (
       <form onSubmit={::this.onSubmit} onChange={::this.onFieldChanged}>
         <fieldset>
@@ -47,11 +38,14 @@ class Signin extends React.Component {
           <label htmlFor="password">Password</label>
           <input id="password" name="password" type="password"
              placeholder="XyZ12%1" />
+           <button type="submit">Signin</button>
         </fieldset>
-        <button type="submit">Signin</button>
+        //TODO use better error way to display error
+        { (!succeed && failureReason) ? <p>{failureReason.toString()}</p>
+          : null }
       </form>
     )
   }
 }
 
-export default SigninConnectorWrapper
+export default connectSubmitPage(Signin, signin, eraseLogin, 'login')
