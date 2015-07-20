@@ -1,25 +1,43 @@
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 
-export default function connectSubmitPage (
-  Form, submitAction, initAction, reducerName) {
-    return connect(state => state[reducerName])(React.createClass({
+/**
+ * Put form into generic container
+ * @param {Object} Form - React Component
+ * @param {submitCallback} submitAction - redux flow action would be called on
+ * submit
+ * @returns {Object} React Component
+ */
+export default function connectSubmitForm (Form, submitAction) {
+  return React.createClass({
 
-      propTypes: {
-        dispatch: PropTypes.func.isRequired,
-        succeed: PropTypes.bool,
-        failureReason: PropTypes.object
-      },
+    contextTypes: {
+      store: PropTypes.shape({
+        dispatch: PropTypes.func.isRequired
+      }).isRequired
+    },
 
-      render () {
-        const { props: { dispatch, succeed, failureReason }, props } = this
-        const { submitAction: bindedSubmit, initAction: bindedInit }
-          = bindActionCreators({ submitAction, initAction }, dispatch)
-        return (<Form {...props} onSubmit={bindedSubmit} onInit={bindedInit}
-          succeed={succeed} failureReason={failureReason} />)
-      }
-    }))
-  }
+    getInitialState () {
+      return {}
+    },
 
-export default connectSubmitPage
+    onSubmit (...args) {
+      const { context: { store: { dispatch } } } = this
+      const { submitAction: bindedSubmit }
+        = bindActionCreators({ submitAction }, dispatch)
+      bindedSubmit(...args)
+        .then(() => this.setState({ succeed: true }))
+        .catch(error => this.setState({ succeed: false, failureReason: error }))
+    },
+
+    render () {
+      const {
+        onSubmit,
+        props,
+        state: { succeed, failureReason }
+      } = this
+      return (<Form {...props} onSubmit={onSubmit} succeed={succeed}
+        failureReason={failureReason} />)
+    }
+  })
+}

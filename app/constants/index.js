@@ -1,2 +1,1 @@
 export const INITIALIZE = 'INITIALIZE'
-export const ERASE_SUBMIT = 'ERASE_SUBMIT'

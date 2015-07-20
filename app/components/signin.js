@@ -1,20 +1,13 @@
 import React, { PropTypes } from 'react'
 import { connectSubmitPage } from 'utils'
-import { eraseSubmit } from 'actions/application'
 import { signin } from 'actions/user'
 
 class Signin extends React.Component {
 
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
-    onInit: PropTypes.func.isRequired,
     succeed: PropTypes.bool,
     failureReason: PropTypes.object
-  }
-
-  componentWillMount () {
-    const { props: { onInit } } = this
-    onInit()
   }
 
   onFieldChanged (event) {
@@ -50,4 +43,4 @@ class Signin extends React.Component {
   }
 }
 
-export default connectSubmitPage(Signin, signin, eraseSubmit, 'login')
+export default connectSubmitPage(Signin, signin)
