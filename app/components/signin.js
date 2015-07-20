@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react'
 import { connectSubmitPage } from 'utils'
 import { signin } from 'actions/user'
+import { redirectOnSucceed } from 'utils'
 
+@redirectOnSucceed('/')
 class Signin extends React.Component {
 
   static propTypes = {
