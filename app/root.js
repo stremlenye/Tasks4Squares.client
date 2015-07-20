@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect, Router, Route } from 'react-router'
-import HashHistory from 'react-router/lib/HashHistory'
+import BrowserHistory from 'react-router/lib/BrowserHistory'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { log } from 'middlewares/log'
@@ -12,17 +12,17 @@ const reducer = combineReducers(reducers)
 const finalCreateStore = applyMiddleware(thunk, log)(createStore)
 const store = finalCreateStore(reducer)
 
-const history = new HashHistory()
+const history = new BrowserHistory()
 
 function renderRoutes () {
   return (
     <Router history={history}>
-      <Route path="/" component={Application}>
+      <Route component={Application}>
         <Route path="tasks" component={Tasks} />
         <Route path="signup" component={Signup} />
         <Route path="signin" component={Signin} />
-        <Redirect from="/" to="tasks" />
       </Route>
+      <Redirect from="/" to="tasks" />
     </Router>
   )
 }

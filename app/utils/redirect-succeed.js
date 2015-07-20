@@ -1,25 +1,17 @@
 import React, { PropTypes } from 'react'
+import redirect from './redirect'
 
-export default function redirectOnSucceed (Form, mapLocation) {
-  return React.createClass({
+export default function redirectOnSucceed (path) {
+  return Component =>
+    @redirect(path, ({ succeed }) => succeed)
+    class Composed extends React.Component {
 
-    contextTypes: {
-      router: PropTypes.object.isRequired
-    },
+      static propTypes = {
+        succeed: PropTypes.bool
+      }
 
-    propTypes: {
-      location: PropTypes.object.isRequired
-    },
-
-    componentWillReceiveProps ({ succeed }) {
-      if (!succeed)
-        return
-      const { context: { router }, props: { location } } = this
-      router.transitionTo(mapLocation(location))
-    },
-
-    render () {
-      return <Form {...this.prop} />
+      render () {
+        return <Component {...this.props}/>
+      }
     }
-  })
 }
