@@ -1,6 +1,6 @@
 import * as api from 'api'
-import { LOGGED_IN } from 'constants/login'
-import { SIGNED_UP } from 'constants/signup'
+import { setToken, deleteToken } from 'persistence'
+import { LOGGED_IN, SIGNED_UP, LOGGED_OUT } from 'constants/user'
 
 export function signup (name, login, password) {
   return dispatch => api.signup.withBody({name, login, password }).exec()
@@ -9,5 +9,15 @@ export function signup (name, login, password) {
 
 export function signin (login, password) {
   return dispatch => api.signin.withBody({ login, password }).exec()
-    .then(() => dispatch({ type: LOGGED_IN }))
+    .then(({ response: { token }}) => {
+      setToken(token)
+      return dispatch({ type: LOGGED_IN })
+    })
+}
+
+export function signout () {
+  deleteToken()
+  return dispatch => dispatch({
+    type: LOGGED_OUT
+  })
 }
