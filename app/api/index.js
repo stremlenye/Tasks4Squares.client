@@ -2,13 +2,13 @@ import Http from 'immutable-http'
 
 const resourceKey = 'resource'
 
-const base = (new Http()).withUrl(`http://localhost:9000/:${resourceKey}`)
-  .withHeader('Content-Type', 'application/json')
-  .withResponseType('json')
-  .withBodyProccessor(JSON.stringify)
+const base = (new Http()).url(`http://localhost:9000/:${resourceKey}`)
+  .header('Content-Type', 'application/json')
+  .responseType('json')
+  .bodyProcessor(JSON.stringify)
 
-const post = base.withMethod('POST')
+const post = base.method('POST')
 
-export const signup = post.withDynamicSegment(resourceKey, 'users/register')
+export const signup = post.segment(resourceKey, 'users/register')
 
-export const signin = post.withDynamicSegment(resourceKey, 'signin')
+export const signin = post.segment(resourceKey, 'signin')
