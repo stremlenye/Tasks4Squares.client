@@ -2,9 +2,10 @@ import React, { PropTypes } from 'react'
 import {
   FlatButton, TextField, Card, CardTitle, CardActions, CardText, AppBar
 } from 'material-ui'
-import { connectSubmitPage, redirectOnSucceed, transition } from 'decorators'
+import { connectSubmitForm, redirectOnSucceed, transition } from 'decorators'
 import { signup } from 'actions/user'
 
+@connectSubmitForm(signup)
 @redirectOnSucceed('/signin')
 @transition
 class Signup extends React.Component {
@@ -62,4 +63,4 @@ class Signup extends React.Component {
   }
 }
 
-export default connectSubmitPage(Signup, signup)
+export default Signup

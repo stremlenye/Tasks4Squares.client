@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react'
-import { connectSubmitPage } from 'decorators'
 import {
   FlatButton, TextField, Card, CardTitle, CardActions, CardText, AppBar
 } from 'material-ui'
 import { signin } from 'actions/user'
-import { redirectOnSucceed, transition } from 'decorators'
+import { redirectOnSucceed, transition, connectSubmitForm } from 'decorators'
 
+@connectSubmitForm(signin)
 @redirectOnSucceed('/')
 @transition
 class Signin extends React.Component {
@@ -60,4 +60,4 @@ class Signin extends React.Component {
   }
 }
 
-export default connectSubmitPage(Signin, signin)
+export default Signin

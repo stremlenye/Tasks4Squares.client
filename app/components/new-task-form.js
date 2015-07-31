@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react'
-import { connectSubmitPage } from 'decorators'
+import { connectSubmitFrom } from 'decorators'
 import { createTask } from 'actions/tasks'
 
+@connectSubmitFrom(createTask)
 class NewTaskForm extends React.Component {
 
   static propTypes = {
@@ -46,4 +47,4 @@ class NewTaskForm extends React.Component {
   }
 }
 
-export default connectSubmitPage(NewTaskForm, createTask)
+export default NewTaskForm
