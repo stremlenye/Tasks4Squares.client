@@ -36,7 +36,6 @@ class Signin extends React.Component {
     callback(login, password)
   }
 
-  // TODO use better error way to display error
   render () {
     const { props: { succeed, failureReason, onTransition } } = this
     return (
