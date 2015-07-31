@@ -12,3 +12,5 @@ const post = base.method('POST')
 export const signup = post.segment(resourceKey, 'users/register')
 
 export const signin = post.segment(resourceKey, 'signin')
+
+export const createTask = post.segment(resourceKey, 'tasks')
