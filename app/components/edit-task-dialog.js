@@ -31,7 +31,7 @@ class EditTaskDialog extends React.Component {
   render () {
     const { props: { task: { text, priority } } } = this
     return (
-      <Dialog title="Edit task"
+      <Dialog {...this.props} title="Edit task"
         actions={this.standardActions}
         actionFocus="submit"
         modal={true}>
