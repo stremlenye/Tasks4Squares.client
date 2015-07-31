@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { connectSubmitPage } from 'utils'
+import { connectSubmitPage } from 'decorators'
 import { createTask } from 'actions/tasks'
 
 class NewTaskForm extends React.Component {

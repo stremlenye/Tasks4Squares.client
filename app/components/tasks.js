@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { secure } from 'utils'
+import { secure } from 'decorators'
 import NewTaskForm from './new-task-form'
 import TasksList from './tasks-list'
 import { fetchTasks } from 'actions/tasks'

@@ -2,10 +2,8 @@ import React, { PropTypes } from 'react'
 import {
   FlatButton, TextField, Card, CardTitle, CardActions, CardText, AppBar
 } from 'material-ui'
-import transition from 'decorators/transition'
-import { connectSubmitPage } from 'utils'
+import { connectSubmitPage, redirectOnSucceed, transition } from 'decorators'
 import { signup } from 'actions/user'
-import { redirectOnSucceed } from 'utils'
 
 @redirectOnSucceed('/signin')
 @transition
