@@ -1,5 +1,5 @@
 import * as api from 'api'
-import { TASK_CREATED, TASKS_FETCHED } from 'constants/tasks'
+import { TASK_CREATED, TASKS_FETCHED, TASK_DELETED } from 'constants/tasks'
 import { getToken } from 'persistence'
 
 function addAuthHeader (http) {
@@ -25,5 +25,15 @@ export function fetchTasks () {
     .then(({ response }) => dispatch({
       type: TASKS_FETCHED,
       payload: response
+    }))
+}
+
+export function deleteTask (id) {
+  return dispatch => addAuthHeader(api.deleteTask)
+    .segment('id', id)
+    .exec()
+    .then(() => dispatch({
+      type: TASK_DELETED,
+      payload: id
     }))
 }

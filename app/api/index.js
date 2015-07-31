@@ -9,6 +9,7 @@ const base = (new Http()).url(`http://localhost:9000/:${resourceKey}`)
 
 const get = base.method('GET')
 const post = base.method('POST')
+const del = base.method('DELETE')
 
 export const signup = post.segment(resourceKey, 'users/register')
 
@@ -17,3 +18,5 @@ export const signin = post.segment(resourceKey, 'signin')
 export const createTask = post.segment(resourceKey, 'tasks')
 
 export const fetchTasks = get.segment(resourceKey, 'tasks')
+
+export const deleteTask = del.segment(resourceKey, 'tasks/:id')

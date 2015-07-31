@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
+import Task from './task'
 
 @connect(state => state.tasks)
 class TasksList extends React.Component {
@@ -12,12 +13,8 @@ class TasksList extends React.Component {
     const { props: { tasks } } = this
     return (
       <div>
-        {tasks.map(({ id, text, priority }) => (
-          <p key={id}>
-            <span>{id}</span>
-            <span>{text}</span>
-            <span>{priority}</span>
-          </p>
+        {tasks.map((task, index) => (
+          <Task key={index} task={task} />
         ))}
       </div>
     )
