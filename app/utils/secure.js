@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import redirect from './redirect'
+import redirect from './redirect' //eslint-disable-line
 
-export default function secure (Component) {
-  @connect(({ application: { loggedin } }) => ({ loggedin }))
+export default function secure (Component) { // eslint-disable-line padded-blocks, max-len
+  @connect(state => state.application)
   @redirect('signin', ({loggedin}) => !loggedin)
   class Secured extends React.Component {
     constructor () {

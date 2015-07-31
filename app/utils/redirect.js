@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 export default function redirect (path, predicate) {
   return Component =>
-    class Composed extends React.Component {
+    class Composed extends React.Component {// eslint-disable-line arrow-spacing
       static contextTypes = {
         router: PropTypes.object.isRequired
       }
