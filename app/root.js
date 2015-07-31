@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
+import { Styles } from 'material-ui'
 import { Redirect, Router, Route } from 'react-router'
 import BrowserHistory from 'react-router/lib/BrowserHistory'
 import { Provider } from 'react-redux'
@@ -7,6 +8,8 @@ import { log } from 'middlewares/log'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Application, Signin, Signup, Tasks } from 'components'
 import * as reducers from 'reducers'
+
+const ThemeManager = new Styles.ThemeManager()
 
 const reducer = combineReducers(reducers)
 const finalCreateStore = applyMiddleware(thunk, log)(createStore)
@@ -28,6 +31,17 @@ function renderRoutes () {
 }
 
 class Root extends React.Component {
+
+  static childContextTypes = {
+    muiTheme: PropTypes.object
+  }
+
+  getChildContext () {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    }
+  }
+
   render () {
     return (
       <Provider store={store}>
