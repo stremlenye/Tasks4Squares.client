@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import { ListItem, Checkbox } from 'material-ui'
 import { deleteTask } from 'actions/tasks'
 
 class Task extends React.Component {
@@ -14,7 +15,8 @@ class Task extends React.Component {
       id: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
       priority: PropTypes.number.isRequired
-    })
+    }),
+    onClick: PropTypes.func.isRequired
   }
 
   onDelete (event) {
@@ -27,15 +29,18 @@ class Task extends React.Component {
     dispatch(deleteTask(id))
   }
 
+  onTouched (event) {
+    event.preventDefault()
+    event.stopPropagation()
+    const { props: { onClick, task } } = this
+    onClick(task)
+  }
+
   render () {
-    const { props: { task: {id, text, priority} } } = this
+    const { props: { task: { text } } } = this
     return (
-      <p key={id}>
-        <span>{id}</span>
-        <span>{text}</span>
-        <span>{priority}</span>
-        <button type="button" onClick={::this.onDelete}>Delete</button>
-      </p>
+      <ListItem primaryText={text} onClick={::this.onTouched}
+        leftCheckbox={<Checkbox onCheck={::this.onDelete}/>} />
     )
   }
 }

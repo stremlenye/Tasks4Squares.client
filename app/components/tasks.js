@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { secure } from 'decorators'
+import { AppBar, Paper } from 'material-ui'
 import NewTaskForm from './new-task-form'
 import TasksList from './tasks-list'
 import { fetchTasks } from 'actions/tasks'
@@ -20,10 +21,15 @@ class Tasks extends React.Component {
 
   render () {
     return (
-      <div>
-        <NewTaskForm />
-        <TasksList />
-      </div>)
+      <Paper>
+        <AppBar title="Tasks4Squares" />
+        <Paper>
+          <NewTaskForm />
+        </Paper>
+        <Paper>
+          <TasksList />
+        </Paper>
+      </Paper>)
   }
 }
 

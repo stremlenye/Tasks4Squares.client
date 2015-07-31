@@ -1,8 +1,11 @@
 import React, { PropTypes } from 'react'
-import { connectSubmitFrom } from 'decorators'
+import {
+  TextField, FlatButton, RadioButtonGroup, RadioButton, Paper
+} from 'material-ui'
+import { connectSubmitForm } from 'decorators'
 import { createTask } from 'actions/tasks'
 
-@connectSubmitFrom(createTask)
+@connectSubmitForm(createTask)
 class NewTaskForm extends React.Component {
 
   static propTypes = {
@@ -15,9 +18,9 @@ class NewTaskForm extends React.Component {
     })
   }
 
-  onButtonPress (event) {
+  onSelected (event, selected) {
     this.setState({
-      square: event.target.value
+      priority: selected
     })
   }
 
@@ -26,23 +29,24 @@ class NewTaskForm extends React.Component {
     event.stopPropagation()
     const {
       props: { onSubmit },
-      state: { task, square }
+      state: { task, priority }
     } = this
-    onSubmit(task, square)
+    onSubmit(task, priority)
   }
 
   render () {
     return (
-      <form onChange={::this.onFieldChange} onSubmit={::this.onSubmit}>
-        <input name="task" type="text"
-          placeholder="What you need to figure out?" />
-        {[1, 2, 3, 4].map(squareid => (
-          <button type="button" value={squareid} key={squareid}
-            onClick={::this.onButtonPress}>
-            {squareid}
-          </button>))}
-        <button type="submit">Submit</button>
-      </form>
+      <Paper >
+        <TextField name="task" type="text" floatingLabelText="Task text"
+          hintText="What you need to figure out?"
+          onChange={::this.onFieldChange} />
+        <RadioButtonGroup name="priority" onChange={::this.onSelected}>
+          {[1, 2, 3, 4].map(squareid => (
+            <RadioButton value={squareid} label={squareid} key={squareid} />
+          ))}
+        </RadioButtonGroup>
+        <FlatButton label="Submit" primary={true} onClick={::this.onSubmit}/>
+      </Paper>
     )
   }
 }
