@@ -2,17 +2,19 @@ import React, { PropTypes } from 'react'
 import {
   FlatButton, TextField, Card, CardTitle, CardActions, CardText, AppBar
 } from 'material-ui'
+import transition from 'decorators/transition'
 import { connectSubmitPage } from 'utils'
 import { signup } from 'actions/user'
 import { redirectOnSucceed } from 'utils'
 
 @redirectOnSucceed('/signin')
+@transition
 class Signup extends React.Component {
-
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
     succeed: PropTypes.bool,
-    failureReason: PropTypes.object
+    failureReason: PropTypes.object,
+    onTransition: PropTypes.func.isRequired
   }
 
   onFieldChanged (event) {
@@ -29,10 +31,12 @@ class Signup extends React.Component {
   }
 
   render () {
-    const { props: { succeed, failureReason } } = this
+    const { props: { succeed, failureReason, onTransition } } = this
     return (
       <div>
-        <AppBar title="Tasks4Squares" />
+        <AppBar title="Tasks4Squares"
+          iconElementRight={<FlatButton label="Signin"
+            onClick={event => onTransition('signin', event)} />} />
         <Card initiallyExpanded={true}>
           <CardTitle
             title="Signup"

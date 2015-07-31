@@ -4,15 +4,18 @@ import {
   FlatButton, TextField, Card, CardTitle, CardActions, CardText, AppBar
 } from 'material-ui'
 import { signin } from 'actions/user'
+import transition from 'decorators/transition'
 import { redirectOnSucceed } from 'utils'
 
 @redirectOnSucceed('/')
+@transition
 class Signin extends React.Component {
 
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
     succeed: PropTypes.bool,
-    failureReason: PropTypes.object
+    failureReason: PropTypes.object,
+    onTransition: PropTypes.func.isRequired
   }
 
   onFieldChanged (event) {
@@ -28,10 +31,12 @@ class Signin extends React.Component {
 
   // TODO use better error way to display error
   render () {
-    const { props: { succeed, failureReason } } = this
+    const { props: { succeed, failureReason, onTransition } } = this
     return (
       <div>
-        <AppBar title="Tasks4Squares" />
+        <AppBar title="Tasks4Squares"
+          iconElementRight={<FlatButton label="Signup"
+            onClick={event => onTransition('signup', event)} />} />
         <Card initiallyExpanded={true}>
           <CardTitle
             title="Signin"
