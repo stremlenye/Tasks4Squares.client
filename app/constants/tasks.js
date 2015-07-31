@@ -1,1 +1,2 @@
 export const TASK_CREATED = 'TASK_CREATED'
+export const TASKS_FETCHED = 'TASKS_FETCHED'

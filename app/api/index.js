@@ -7,6 +7,7 @@ const base = (new Http()).url(`http://localhost:9000/:${resourceKey}`)
   .responseType('json')
   .bodyProcessor(JSON.stringify)
 
+const get = base.method('GET')
 const post = base.method('POST')
 
 export const signup = post.segment(resourceKey, 'users/register')
@@ -14,3 +15,5 @@ export const signup = post.segment(resourceKey, 'users/register')
 export const signin = post.segment(resourceKey, 'signin')
 
 export const createTask = post.segment(resourceKey, 'tasks')
+
+export const fetchTasks = get.segment(resourceKey, 'tasks')
