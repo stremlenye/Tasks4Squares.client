@@ -1,12 +1,20 @@
 import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
 import {
   FlatButton, TextField, Card, CardTitle, CardActions, CardText, AppBar
 } from 'material-ui'
 import { signin } from 'actions/user'
-import { redirectOnSucceed, transition, connectSubmitForm } from 'decorators'
+import {
+  redirectOnSucceed,
+  transition,
+  connectSubmitForm,
+  redirect
+} from 'decorators'
 
 @connectSubmitForm(signin)
 @redirectOnSucceed('/')
+@connect(({application}) => application)
+@redirect('/tasks', ({ loggedin }) => loggedin)
 @transition
 class Signin extends React.Component {
 

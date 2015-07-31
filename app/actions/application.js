@@ -1,7 +1,12 @@
 import * as constants from 'constants'
+import { getToken } from 'persistence'
 
 export function initialize () {
-  return {
-    type: constants.INITIALIZE
-  }
+  const token = getToken()
+  return dispatch => dispatch({
+    type: constants.INITIALIZE,
+    payload: {
+      loggedin: !!token
+    }
+  })
 }
