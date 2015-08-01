@@ -3,10 +3,10 @@ import { getToken } from 'persistence'
 
 export function initialize () {
   const token = getToken()
-  return dispatch => dispatch({
+  return {
     type: constants.INITIALIZE,
     payload: {
       loggedin: !!token
     }
-  })
+  }
 }

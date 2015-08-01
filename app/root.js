@@ -8,12 +8,15 @@ import { log } from 'middlewares/log'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Application, Signin, Signup, Tasks } from 'components'
 import * as reducers from 'reducers'
+import { initialize } from 'actions/application'
 
-const ThemeManager = new Styles.ThemeManager()
+const { payload: application } = initialize()
 
 const reducer = combineReducers(reducers)
 const finalCreateStore = applyMiddleware(thunk, log)(createStore)
-const store = finalCreateStore(reducer)
+const store = finalCreateStore(reducer, { application })
+
+const ThemeManager = new Styles.ThemeManager()
 
 const history = new BrowserHistory()
 

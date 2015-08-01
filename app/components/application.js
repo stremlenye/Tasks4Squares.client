@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import { initialize } from 'actions/application'
 
 class Application extends React.Component {
 
@@ -11,11 +10,6 @@ class Application extends React.Component {
 
   static propTypes = {
     children: PropTypes.node.isRequired
-  }
-
-  componentDidMount () {
-    const { context: { store: { dispatch } } } = this
-    dispatch(initialize())
   }
 
   render () {
