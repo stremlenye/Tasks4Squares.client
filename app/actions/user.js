@@ -1,5 +1,5 @@
 import * as api from 'api'
-import { setToken, deleteToken } from 'persistence'
+import { setToken, removeToken } from 'persistence'
 import { LOGGED_IN, SIGNED_UP, LOGGED_OUT } from 'constants/user'
 
 export function signup (name, login, password) {
@@ -16,7 +16,7 @@ export function signin (login, password) {
 }
 
 export function signout () {
-  deleteToken()
+  removeToken()
   return dispatch => dispatch({
     type: LOGGED_OUT
   })

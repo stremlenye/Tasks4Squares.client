@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react'
 import { secure } from 'decorators'
-import { AppBar, Paper } from 'material-ui'
+import { AppBar, Paper, FlatButton } from 'material-ui'
 import NewTaskForm from './new-task-form'
 import TasksList from './tasks-list'
 import { fetchTasks } from 'actions/tasks'
+import { signout } from 'actions/user'
 
 @secure
 class Tasks extends React.Component {
@@ -19,10 +20,17 @@ class Tasks extends React.Component {
     dispatch(fetchTasks())
   }
 
+  onLogout () {
+    const { context: { store: { dispatch } } } = this
+    dispatch(signout())
+  }
+
   render () {
     return (
       <Paper>
-        <AppBar title="Tasks4Squares" />
+        <AppBar title="Tasks4Squares"
+          iconElementRight={<FlatButton label="Logout"
+          onClick={::this.onLogout} />} />
         <Paper>
           <NewTaskForm />
         </Paper>
