@@ -1,8 +1,15 @@
 import React, { PropTypes } from 'react'
-import { Paper, ListDivider } from 'material-ui'
+import { Paper } from 'material-ui'
 import { connect } from 'react-redux'
 import TaskGroup from './tasks-group'
 import EditTaskDialog from './edit-task-dialog'
+
+const priorities = {
+  [1]: 'Red',
+  [2]: 'Yellow',
+  [3]: 'Green',
+  [4]: 'Blue'
+}
 
 @connect(state => state.tasks)
 class TasksList extends React.Component {
@@ -27,25 +34,29 @@ class TasksList extends React.Component {
     })
   }
 
+  splitIntoGroups (tasks) {
+    return Object.entries(priorities).reduce((groups, [pr, name]) => {
+      const p = parseInt(pr)
+      groups[name] = tasks.filter(({ priority }) => p === priority)
+      return groups
+    }, {})
+  }
+
+  renderGroups (groups) {
+    return Object.entries(groups).map(([title, tasks]) => (
+      <Paper>
+        <TaskGroup title={title} tasks={tasks}
+          onTaskClick={::this.onTaskClick} />
+      </Paper>
+    ))
+  }
+
   render () {
     const { props: { tasks }, state: { editTask } } = this
-    const firstPriority = tasks.filter(({ priority }) => priority === 1)
-    const secondPriority = tasks.filter(({ priority }) => priority === 2)
-    const thirdPriority = tasks.filter(({ priority }) => priority === 3)
-    const fourthPriority = tasks.filter(({ priority }) => priority === 4)
+    const groups = this.splitIntoGroups(tasks)
     return (
       <Paper>
-        <TaskGroup title="Red" tasks={firstPriority}
-          onTaskClick={::this.onTaskClick} />
-        <ListDivider />
-        <TaskGroup title="Yellow" tasks={secondPriority}
-          onTaskClick={::this.onTaskClick} />
-        <ListDivider />
-        <TaskGroup title="Green" tasks={thirdPriority}
-          onTaskClick={::this.onTaskClick} />
-        <ListDivider />
-        <TaskGroup title="Blue" tasks={fourthPriority}
-          onTaskClick={::this.onTaskClick} />
+        {this.renderGroups(groups)}
         {editTask ? <EditTaskDialog task={editTask}
           onDismiss={::this.onDialogClose} /> : null}
       </Paper>
