@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import { secure } from 'decorators'
-import { AppBar, Paper, FlatButton } from 'material-ui'
+import {
+  AppBar, Paper, FlatButton
+} from 'material-ui'
 import NewTaskForm from './new-task-form'
 import TasksList from './tasks-list'
 import { fetchTasks } from 'actions/tasks'
@@ -30,7 +32,7 @@ class Tasks extends React.Component {
       <Paper>
         <AppBar title="Tasks4Squares"
           iconElementRight={<FlatButton label="Logout"
-          onClick={::this.onLogout} />} />
+            onClick={::this.onLogout} />} />
         <Paper>
           <NewTaskForm />
         </Paper>
