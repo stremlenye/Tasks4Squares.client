@@ -1,49 +1,57 @@
 import React, { PropTypes } from 'react'
-import { Dialog, TextField, RadioButtonGroup, RadioButton } from 'material-ui'
-import { connectSubmitForm } from 'decorators'
-import { updateTask } from 'actions/tasks'
+import { Dialog, TextField, FlatButton } from 'material-ui'
 
-@connectSubmitForm(updateTask)
 class EditTaskDialog extends React.Component {
 
   static propTypes = {
     task: PropTypes.shape({
       id: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-      priority: PropTypes.number.isRequired
-    }).isRequired,
-    onSubmit: PropTypes.func.isRequired
+      text: PropTypes.string.isRequired
+    }),
+    priority: PropTypes.number.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    onDismiss: PropTypes.func.isRequired
+  }
+
+  onFieldChange (event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
   }
 
   onSubmit () {
     const {
-      props: { onSubmit, task: { id } },
-      state: { text, priority }
+      props: { onSubmit, priority, task },
+      state: { text }
     } = this
-    onSubmit(id, text, priority)
+    const id = task ? task.id : undefined
+    onSubmit({id, text, priority})
   }
 
-  standardActions = [
-    { text: 'Cancel' },
-    { text: 'Submit', onTouchTap: this.onSubmit, ref: 'submit' }
-  ];
+  onCancel () {
+    const { props: { onDismiss } } = this
+    onDismiss()
+  }
 
   render () {
-    const { props: { task: { text, priority } } } = this
     return (
-      <Dialog {...this.props} title="Edit task"
-        actions={this.standardActions}
+      <Dialog title="Edit task"
+        actions={[
+          <FlatButton key="cancel"
+            label="Cancel"
+            secondary={true}
+            onClick={::this.onCancel} />,
+          <FlatButton key="submit"
+            label="Submit"
+            primary={true}
+            onClick={::this.onSubmit} />
+        ]}
         actionFocus="submit"
+        openImmediately={true}
         modal={true}>
         <TextField name="text" type="text" floatingLabelText="Task text"
-          hintText="What you need to figure out?" defaultValue={text}
+          hintText="What you need to figure out?"
           onChange={::this.onFieldChange} />
-        <RadioButtonGroup name="priority" onChange={::this.onSelected}
-          defaultSelected={priority}>
-          {[1, 2, 3, 4].map(squareid => (
-            <RadioButton value={squareid} label={squareid} key={squareid} />
-          ))}
-        </RadioButtonGroup>
       </Dialog>
     )
   }

@@ -16,21 +16,27 @@ const addButtonStyle = {
 class TasksGroup extends React.Component {
 
   static propTypes = {
-    tasks: PropTypes.func.isRequired,
+    tasks: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired,
-    onTaskClick: PropTypes.func.isRequired
+    priority: PropTypes.number.isRequired,
+    onAdd: PropTypes.func.isRequired
+  }
+
+  onAdd () {
+    const { props: { onAdd, priority } } = this
+    onAdd(priority)
   }
 
   render () {
-    const { props: { tasks, title, onTaskClick } } = this
+    const { props: { tasks, title } } = this
     return (
       <Paper className="tasks-group">
-        <FloatingActionButton style={addButtonStyle} >
+        <FloatingActionButton style={addButtonStyle} onClick={::this.onAdd}>
           <FontIcon className="material-icons">add</FontIcon>
         </FloatingActionButton>
         <List subheader={title}>
           {tasks.map((task, index) => (
-            <Task key={index} task={task} onClick={onTaskClick} />
+            <Task key={index} task={task} />
           ))}
         </List>
       </Paper>
