@@ -3,12 +3,14 @@ import {
   Paper,
   List,
   FloatingActionButton,
-  FontIcon
+  FontIcon,
+  Toolbar,
+  ToolbarTitle,
+  ToolbarGroup
 } from 'material-ui'
 import Task from './task'
 
 const addButtonStyle = {
-  float: 'right',
   'margin-top': '-28px',
   'margin-right': '28px'
 }
@@ -19,7 +21,8 @@ class TasksGroup extends React.Component {
     tasks: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired,
     priority: PropTypes.number.isRequired,
-    onAdd: PropTypes.func.isRequired
+    onAdd: PropTypes.func.isRequired,
+    color: PropTypes.string.isRequired
   }
 
   onAdd () {
@@ -28,13 +31,20 @@ class TasksGroup extends React.Component {
   }
 
   render () {
-    const { props: { tasks, title } } = this
+    const { props: { tasks, title, color } } = this
     return (
       <Paper className="tasks-group">
-        <FloatingActionButton style={addButtonStyle} onClick={::this.onAdd}>
-          <FontIcon className="material-icons">add</FontIcon>
-        </FloatingActionButton>
-        <List subheader={title}>
+        <Toolbar style={{'background-color': color}}>
+          <ToolbarGroup float="left">
+            <ToolbarTitle text={title}/>
+          </ToolbarGroup>
+          <ToolbarGroup float="right">
+            <FloatingActionButton onClick={::this.onAdd} style={addButtonStyle}>
+              <FontIcon className="material-icons">add</FontIcon>
+            </FloatingActionButton>
+          </ToolbarGroup>
+        </Toolbar>
+        <List className="list">
           {tasks.map((task, index) => (
             <Task key={index} task={task} />
           ))}
