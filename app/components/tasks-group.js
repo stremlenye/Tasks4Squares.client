@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { List } from 'material-ui'
+import { Paper, List } from 'material-ui'
 import Task from './task'
 
 class TasksGroup extends React.Component {
@@ -13,11 +13,13 @@ class TasksGroup extends React.Component {
   render () {
     const { props: { tasks, title, onTaskClick } } = this
     return (
-      <List subheader={title}>
-        {tasks.map((task, index) => (
-          <Task key={index} task={task} onClick={onTaskClick} />
-        ))}
-      </List>
+      <Paper className="tasks-group">
+        <List subheader={title}>
+          {tasks.map((task, index) => (
+            <Task key={index} task={task} onClick={onTaskClick} />
+          ))}
+        </List>
+      </Paper>
     )
   }
 }
