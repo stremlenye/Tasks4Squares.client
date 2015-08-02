@@ -3,7 +3,6 @@ import { secure } from 'decorators'
 import {
   AppBar, Paper, FlatButton
 } from 'material-ui'
-import NewTaskForm from './new-task-form'
 import TasksList from './tasks-list'
 import { fetchTasks } from 'actions/tasks'
 import { signout } from 'actions/user'
@@ -33,9 +32,6 @@ class Tasks extends React.Component {
         <AppBar title="Tasks4Squares"
           iconElementRight={<FlatButton label="Logout"
             onClick={::this.onLogout} />} />
-        <Paper>
-          <NewTaskForm />
-        </Paper>
         <Paper>
           <TasksList />
         </Paper>
