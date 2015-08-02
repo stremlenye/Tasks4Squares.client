@@ -12,7 +12,7 @@ import Task from './task'
 
 const addButtonStyle = {
   'margin-top': '-28px',
-  'margin-right': '28px'
+  'margin-right': '14px'
 }
 
 class TasksGroup extends React.Component {
