@@ -32,7 +32,7 @@ class Tasks extends React.Component {
         <AppBar title="Tasks4Squares"
           iconElementRight={<FlatButton label="Logout"
             onClick={::this.onLogout} />} />
-        <Paper>
+          <Paper className="tasks-view">
           <TasksList />
         </Paper>
       </Paper>)

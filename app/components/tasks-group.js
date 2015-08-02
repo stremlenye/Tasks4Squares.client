@@ -1,6 +1,17 @@
 import React, { PropTypes } from 'react'
-import { Paper, List } from 'material-ui'
+import {
+  Paper,
+  List,
+  FloatingActionButton,
+  FontIcon
+} from 'material-ui'
 import Task from './task'
+
+const addButtonStyle = {
+  float: 'right',
+  'margin-top': '-28px',
+  'margin-right': '28px'
+}
 
 class TasksGroup extends React.Component {
 
@@ -14,6 +25,9 @@ class TasksGroup extends React.Component {
     const { props: { tasks, title, onTaskClick } } = this
     return (
       <Paper className="tasks-group">
+        <FloatingActionButton style={addButtonStyle} >
+          <FontIcon className="material-icons">add</FontIcon>
+        </FloatingActionButton>
         <List subheader={title}>
           {tasks.map((task, index) => (
             <Task key={index} task={task} onClick={onTaskClick} />
