@@ -4,11 +4,8 @@ import { Dialog, TextField, FlatButton } from 'material-ui'
 class EditTaskDialog extends React.Component {
 
   static propTypes = {
-    task: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired
-    }),
-    priority: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onDismiss: PropTypes.func.isRequired
   }
@@ -21,11 +18,11 @@ class EditTaskDialog extends React.Component {
 
   onSubmit () {
     const {
-      props: { onSubmit, priority, task },
+      props: { onSubmit, onDismiss },
       state: { text }
     } = this
-    const id = task ? task.id : undefined
-    onSubmit({id, text, priority})
+    onSubmit(text)
+    onDismiss()
   }
 
   onCancel () {
@@ -34,8 +31,9 @@ class EditTaskDialog extends React.Component {
   }
 
   render () {
+    const { props: { title } } = this
     return (
-      <Dialog title="Edit task"
+      <Dialog title={title}
         actions={[
           <FlatButton key="cancel"
             label="Cancel"

@@ -4,10 +4,10 @@ import {
   AppBar, Paper, FlatButton
 } from 'material-ui'
 import TasksList from './tasks-list'
-import { fetchTasks, createTask } from 'actions/tasks'
+import { fetchTasks } from 'actions/tasks'
 import { signout } from 'actions/user'
 
-import EditTaskDialog from './edit-task-dialog'
+import NewTask from './new-task'
 
 @secure
 class Tasks extends React.Component {
@@ -32,38 +32,29 @@ class Tasks extends React.Component {
     dispatch(signout())
   }
 
-  onTaskCreate ({ text, priority }) {
-    const { context: { store: { dispatch } } } = this
-    dispatch(createTask(text, priority))
+  showNewTaskDialog (priority) {
     this.setState({
-      editTask: undefined
-    })
-  }
-
-  showTaskDialog (priority, task) {
-    this.setState({
-      editTask: { priority, task }
+      newTask: { priority }
     })
   }
 
   onDialogClose () {
     this.setState({
-      editTask: undefined
+      newTask: undefined
     })
   }
 
   render () {
-    const { state: { editTask } } = this
+    const { state: { newTask } } = this
     return (
       <Paper>
         <AppBar title="Tasks4Squares"
           iconElementRight={<FlatButton label="Logout"
             onClick={::this.onLogout} />} />
           <Paper className="tasks-view">
-          <TasksList onAdd={::this.showTaskDialog} />
+          <TasksList onAdd={::this.showNewTaskDialog} />
         </Paper>
-        {editTask ? <EditTaskDialog priority={editTask.priority}
-          task={editTask.task} onSubmit={::this.onTaskCreate}
+        {newTask ? <NewTask priority={newTask.priority}
           onDismiss={::this.onDialogClose}/> : null}
       </Paper>)
   }
