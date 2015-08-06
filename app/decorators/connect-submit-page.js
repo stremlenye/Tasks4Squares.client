@@ -3,14 +3,12 @@ import { bindActionCreators } from 'redux'
 
 /**
  * Put form into generic container
- * @param {Object} Form - React Component
  * @param {submitCallback} submitAction - redux flow action would be called on
  * submit
  * @returns {Object} React Component
  */
-export default function connectSubmitForm (Form, submitAction) {
-  return React.createClass({
-
+export default function connectSubmitForm (submitAction) {
+  return Form => React.createClass({
     contextTypes: {
       store: PropTypes.shape({
         dispatch: PropTypes.func.isRequired

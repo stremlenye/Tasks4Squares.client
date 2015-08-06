@@ -1,15 +1,19 @@
 import React, { PropTypes } from 'react'
-import { connectSubmitPage } from 'utils'
+import {
+  FlatButton, TextField, Card, CardTitle, CardActions, CardText, AppBar
+} from 'material-ui'
+import { connectSubmitForm, redirectOnSucceed, transition } from 'decorators'
 import { signup } from 'actions/user'
-import { redirectOnSucceed } from 'utils'
 
+@connectSubmitForm(signup)
 @redirectOnSucceed('/signin')
+@transition
 class Signup extends React.Component {
-
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
     succeed: PropTypes.bool,
-    failureReason: PropTypes.object
+    failureReason: PropTypes.object,
+    onTransition: PropTypes.func.isRequired
   }
 
   onFieldChanged (event) {
@@ -26,26 +30,37 @@ class Signup extends React.Component {
   }
 
   render () {
-    const { props: { succeed, failureReason } } = this
+    const { props: { succeed, failureReason, onTransition } } = this
     return (
-      <form onChange={::this.onFieldChanged} onSubmit={::this.onSubmit}>
-        <fieldset>
-          <label htmlFor="name">Email</label>
-          <input id="name" name="name" placeholder="Vasiliy"
-            type="text" />
-          <label htmlFor="login">Email</label>
-          <input id="login" name="login" placeholder="your@mail.com"
-            type="email" />
-          <label htmlFor="password">Password</label>
-          <input id="password" name="password" type="password"
-             placeholder="XyZ12%1" />
-           <button type="submit">Signup</button>
-        </fieldset>
-        { (!succeed && failureReason) ? <p>{failureReason.toString()}</p>
-          : null }
-      </form>
+      <div>
+        <AppBar title="Tasks4Squares"
+          iconElementRight={<FlatButton label="Signin"
+            onClick={event => onTransition('signin', event)} />} />
+        <Card initiallyExpanded={true}>
+          <CardTitle
+            title="Signup"
+            subtitle="Signup into Tasks4Squares and start sorting out things" />
+          <CardText>
+            <TextField id="name" name="name" hintText="Vasiliy"
+              type="text" floatingLabelText="Name"
+              onChange={::this.onFieldChanged} />
+            <TextField id="login" name="login" hintText="your@mail.com"
+              type="email" floatingLabelText="Email"
+              onChange={::this.onFieldChanged} />
+            <TextField id="password" name="password" type="password"
+              hintText="XyZ12%1" floatingLabelText="Password"
+              onChange={::this.onFieldChanged} />
+          </CardText>
+          <CardActions>
+            <FlatButton primary={true} label="Signup"
+              onClick={::this.onSubmit} />
+          </CardActions>
+          { (!succeed && failureReason) ? <p>{failureReason.toString()}</p>
+            : null }
+      </Card>
+    </div>
     )
   }
 }
 
-export default connectSubmitPage(Signup, signup)
+export default Signup

@@ -1,4 +1,5 @@
-import * as constants from 'constants/user'
+import { LOGGED_IN, LOGGED_OUT } from 'constants/user'
+import { INITIALIZE } from 'constants'
 import { createReducer } from 'utils'
 
 const initial = {
@@ -6,8 +7,9 @@ const initial = {
 }
 
 const actionsMap = {
-  [constants.LOGGED_IN]: () => ({ loggedin: true }),
-  [constants.LOGGED_OUT]: () => ({ loggedin: false })
+  [INITIALIZE]: (state, { loggedin }) => ({ loggedin }),
+  [LOGGED_IN]: () => ({ loggedin: true }),
+  [LOGGED_OUT]: () => ({ loggedin: false })
 }
 
 export default createReducer(initial, actionsMap)

@@ -10,6 +10,6 @@ export function getToken () {
   return store.get(tokenKey)
 }
 
-export function deleteToken () {
-  store.delete(tokenKey)
+export function removeToken () {
+  store.remove(tokenKey)
 }
