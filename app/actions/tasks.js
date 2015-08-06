@@ -22,10 +22,10 @@ export function createTask (text, priority) {
 }
 
 export function updateTask (id, text, priority) {
-  return dispatch => addAuthHeader(api.createTask)
+  return dispatch => addAuthHeader(api.updateTask)
     .segment('id', id)
     .body({text, priority: parseInt(priority)}).exec()
-    .then(({ response: { id } }) => dispatch({
+    .then(() => dispatch({
       type: TASK_UPDATED,
       payload: {
         id,

@@ -8,6 +8,7 @@ import { fetchTasks } from 'actions/tasks'
 import { signout } from 'actions/user'
 
 import NewTask from './new-task'
+import EditTask from './edit-task'
 
 @secure
 class Tasks extends React.Component {
@@ -38,23 +39,34 @@ class Tasks extends React.Component {
     })
   }
 
+  showEditTaskDialog ({ id, text, priority }) {
+    this.setState({
+      editTask: { id, text, priority }
+    })
+  }
+
   onDialogClose () {
     this.setState({
-      newTask: undefined
+      newTask: undefined,
+      editTask: undefined
     })
   }
 
   render () {
-    const { state: { newTask } } = this
+    const { state: { newTask, editTask } } = this
     return (
       <Paper>
         <AppBar title="Tasks4Squares"
           iconElementRight={<FlatButton label="Logout"
             onClick={::this.onLogout} />} />
           <Paper className="tasks-view">
-          <TasksList onAdd={::this.showNewTaskDialog} />
+          <TasksList onAdd={::this.showNewTaskDialog}
+            onEdit={::this.showEditTaskDialog} />
         </Paper>
         {newTask ? <NewTask priority={newTask.priority}
+          onDismiss={::this.onDialogClose}/> : null}
+        {editTask ? <EditTask id={editTask.id} text={editTask.text}
+          priority={editTask.priority}
           onDismiss={::this.onDialogClose}/> : null}
       </Paper>)
   }

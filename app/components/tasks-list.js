@@ -31,7 +31,8 @@ class TasksList extends React.Component {
 
   static propTypes = {
     tasks: PropTypes.array.isRequired,
-    onAdd: PropTypes.func.isRequired
+    onAdd: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired
   }
 
   splitIntoGroups (tasks) {
@@ -51,7 +52,8 @@ class TasksList extends React.Component {
     return Object.entries(groups).map(([title, { priority, tasks, color }]) => (
       <Paper key={title}>
         <TaskGroup title={title} tasks={tasks}
-          priority={priority} onAdd={this.props.onAdd} color={color} />
+          priority={priority} onAdd={this.props.onAdd}
+          onEdit={this.props.onEdit} color={color} />
       </Paper>
     ))
   }

@@ -22,6 +22,7 @@ class TasksGroup extends React.Component {
     title: PropTypes.string.isRequired,
     priority: PropTypes.number.isRequired,
     onAdd: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
     color: PropTypes.string.isRequired
   }
 
@@ -31,7 +32,7 @@ class TasksGroup extends React.Component {
   }
 
   render () {
-    const { props: { tasks, title, color } } = this
+    const { props: { tasks, title, color, onEdit } } = this
     return (
       <Paper className="tasks-group">
         <Toolbar style={{'background-color': color}}>
@@ -46,7 +47,7 @@ class TasksGroup extends React.Component {
         </Toolbar>
         <List className="list">
           {tasks.map((task, index) => (
-            <Task key={index} task={task} />
+            <Task key={index} task={task} onEdit={onEdit} />
           ))}
         </List>
       </Paper>

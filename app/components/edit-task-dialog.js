@@ -4,7 +4,7 @@ import { Dialog, TextField, FlatButton } from 'material-ui'
 class EditTaskDialog extends React.Component {
 
   static propTypes = {
-    text: PropTypes.string.isRequired,
+    text: PropTypes.string,
     title: PropTypes.string.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onDismiss: PropTypes.func.isRequired
@@ -31,7 +31,7 @@ class EditTaskDialog extends React.Component {
   }
 
   render () {
-    const { props: { title } } = this
+    const { props: { title, text } } = this
     return (
       <Dialog title={title}
         actions={[
@@ -49,6 +49,7 @@ class EditTaskDialog extends React.Component {
         modal={true}>
         <TextField name="text" type="text" floatingLabelText="Task text"
           hintText="What you need to figure out?"
+          defaultValue={text}
           onChange={::this.onFieldChange} />
       </Dialog>
     )

@@ -1,29 +1,31 @@
 import React, { PropTypes } from 'react'
 import { connectSubmitForm } from 'decorators'
-import { createTask } from 'actions/tasks'
+import { updateTask } from 'actions/tasks'
 import EditTaskDialog from './edit-task-dialog'
 
-@connectSubmitForm(createTask)
-class NewTask extends React.Component {
+@connectSubmitForm(updateTask)
+class EditTask extends React.Component {
 
   static propTypes = {
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
     priority: PropTypes.number.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onDismiss: PropTypes.func
   }
 
   onSubmit (text) {
-    const { props: { onSubmit, priority } } = this
-    onSubmit(text, priority)
+    const { props: { onSubmit, id, priority } } = this
+    onSubmit(id, text, priority)
   }
 
   render () {
-    const { props: { onDismiss } } = this
+    const { props: { text, onDismiss } } = this
     return (
-      <EditTaskDialog title="New task"
+      <EditTaskDialog title="Edit task" text={text}
        onSubmit={::this.onSubmit} onDismiss={onDismiss} />
     )
   }
 }
 
-export default NewTask
+export default EditTask
