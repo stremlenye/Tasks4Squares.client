@@ -6,7 +6,7 @@ export function initialize () {
   return {
     type: constants.INITIALIZE,
     payload: {
-      loggedin: !!token
+      token
     }
   }
 }

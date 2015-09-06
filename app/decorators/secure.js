@@ -4,14 +4,14 @@ import redirect from './redirect' //eslint-disable-line
 
 export default function secure (Component) { // eslint-disable-line padded-blocks, max-len
   @connect(state => state.application)
-  @redirect('signin', ({loggedin}) => !loggedin)
+  @redirect('signin', ({ token }) => !token)
   class Secured extends React.Component {
     constructor () {
       super()
     }
 
     static propTypes = {
-      loggedin: PropTypes.bool.isRequired
+      token: PropTypes.bool.isRequired
     }
 
     render () {

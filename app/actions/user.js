@@ -11,7 +11,10 @@ export function signin (login, password) {
   return dispatch => api.signin.body({ login, password }).exec()
     .then(({ response: { token }}) => {
       setToken(token)
-      return dispatch({ type: LOGGED_IN })
+      return dispatch({
+        type: LOGGED_IN,
+        payload: { token }
+      })
     })
 }
 
