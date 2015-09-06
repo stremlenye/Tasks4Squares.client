@@ -8,13 +8,13 @@ import { log } from 'middlewares/log'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { Application, Signin, Signup, Tasks } from 'components'
 import * as reducers from 'reducers'
-import { initialize } from 'actions/application'
+import { createRehydrationPayload } from 'rehydration'
 
-const { payload: application } = initialize()
+const rehydrationPayload = createRehydrationPayload()
 
 const reducer = combineReducers(reducers)
 const finalCreateStore = compose(applyMiddleware(thunk, log))(createStore)
-const store = finalCreateStore(reducer, { application })
+const store = finalCreateStore(reducer, rehydrationPayload)
 if (module.hot) {
     // Enable Webpack hot module replacement for reducers
   module.hot.accept('reducers', () => {
