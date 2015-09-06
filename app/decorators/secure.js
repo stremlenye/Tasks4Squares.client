@@ -11,7 +11,9 @@ export default function secure (Component) { // eslint-disable-line padded-block
     }
 
     static propTypes = {
-      token: PropTypes.bool.isRequired
+      application: PropTypes.shape({
+        token: PropTypes.bool
+      }).isRequired
     }
 
     render () {
