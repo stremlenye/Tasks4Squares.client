@@ -3,8 +3,8 @@ import {
   TASK_CREATED, TASKS_FETCHED, TASK_DELETED, TASK_UPDATED
 } from 'constants/tasks'
 
-function addAuthHeader (getToken, http) {
-  return http.header('Authorization', `Token ${getToken()}`)
+function addAuthHeader (token, http) {
+  return http.header('Authorization', `Token ${token}`)
 }
 
 function getToken ({ application: { token } }) {
